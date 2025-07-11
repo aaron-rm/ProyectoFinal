@@ -19,10 +19,10 @@ Haga los comentarios que considere pertinentes en el desarrollo del código.
 
 Utilice las convenciones de códigos: 
 
-Nombres de variables y objetos: camelCase 
-
-Nombres de funciones: camelCase 
-
-Clases: PascalCase 
-
-Constantes: SNAKE_CASE (con mayúsculas) 
+    Nombres de variables y objetos: camelCase 
+    
+    Nombres de funciones: camelCase 
+    
+    Clases: PascalCase 
+    
+    Constantes: SNAKE_CASE (con mayúsculas) 
