@@ -7,6 +7,10 @@ package cSistema.bProductos;
 //+ double calcularTotal()
 //+ void verCarrito()
 
+
+//AGREGAR OPCION PARA PAGAR CON PUNTOS
+
+
 public class CarritoDeCompra {
 
 
