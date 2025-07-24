@@ -1,13 +1,12 @@
 package bInterfaz;
 
 import cSistema.aUsuario.Cliente;
-import cSistema.bProductos.CarritoDeCompra;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class InterfazProductos {
-    private int iconScale = 30;
+    private final int ICON_SCALE = 30;
     private JPanel InterfazPrincipal;
     private JButton cerrarSesiónButton;
     private JButton volverButton;
@@ -23,18 +22,18 @@ public class InterfazProductos {
         frame.setResizable(true);
         frame.setLocationRelativeTo(null);
         ImageIcon iconEmpresa = new ImageIcon(getClass().getResource("/images/SpeedLab LOGO.png"));
-        frame.setIconImage(iconEmpresa.getImage().getScaledInstance(iconScale,iconScale, Image.SCALE_SMOOTH));
+        frame.setIconImage(iconEmpresa.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH));
 
 
         //boton carro de compras
         ImageIcon iconCarrito = new ImageIcon(getClass().getResource("/images/carro compras.png"));
-        carroDeComprasButton.setIcon(new ImageIcon(iconCarrito.getImage().getScaledInstance(iconScale,iconScale,Image.SCALE_SMOOTH)));
+        carroDeComprasButton.setIcon(new ImageIcon(iconCarrito.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE,Image.SCALE_SMOOTH)));
         carroDeComprasButton.addActionListener(e -> {
            new InterfazProductosCarroDeCompras();
         });
 
         ImageIcon iconUsuario = new ImageIcon(getClass().getResource("/images/usuario.png"));
-        cerrarSesiónButton.setIcon(new ImageIcon(iconUsuario.getImage().getScaledInstance(iconScale,iconScale,Image.SCALE_SMOOTH)));
+        cerrarSesiónButton.setIcon(new ImageIcon(iconUsuario.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE,Image.SCALE_SMOOTH)));
         cerrarSesiónButton.addActionListener(e -> {
             frame.dispose();
             new InterfazCuenta();

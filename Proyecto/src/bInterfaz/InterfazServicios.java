@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class InterfazServicios {
-    private int iconScale = 30;
+    private final int ICON_SCALE = 30;
     private JPanel InterfazPrincipal;
     private JButton cerrarSesiónButton;
     private JButton volverButton;
@@ -23,12 +23,12 @@ public class InterfazServicios {
         frame.setResizable(true);
         frame.setLocationRelativeTo(null);
         ImageIcon iconEmpresa = new ImageIcon(getClass().getResource("/images/SpeedLab LOGO.png"));
-        frame.setIconImage(iconEmpresa.getImage().getScaledInstance(iconScale,iconScale, Image.SCALE_SMOOTH));
+        frame.setIconImage(iconEmpresa.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH));
 
 
 
         ImageIcon iconUsuario = new ImageIcon(getClass().getResource("/images/usuario.png"));
-        cerrarSesiónButton.setIcon(new ImageIcon(iconUsuario.getImage().getScaledInstance(iconScale,iconScale,Image.SCALE_SMOOTH)));
+        cerrarSesiónButton.setIcon(new ImageIcon(iconUsuario.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE,Image.SCALE_SMOOTH)));
         cerrarSesiónButton.addActionListener(e -> {
             frame.dispose();
             new InterfazCuenta();

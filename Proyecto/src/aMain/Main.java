@@ -5,7 +5,7 @@ import bInterfaz.InterfazCuenta;
 import javax.swing.*;
 import java.awt.*;
 
-
+//Grupo:
 //Aaron Remarchuk   8-1042-134
 //Luis King         8-1017-548
 //Edwin Rodriguez   8-975-208

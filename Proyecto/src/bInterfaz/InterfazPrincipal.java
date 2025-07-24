@@ -19,7 +19,7 @@ public class InterfazPrincipal extends JFrame{
     private JButton serviciosButton;
     private JButton cerrarSesiónButton;
     private JButton salirButton;
-    private int iconScale = 30;
+    private final int ICON_SCALE = 30;
     private boolean sesionIniciada=false;
     private Cliente cliente;
 
@@ -33,20 +33,20 @@ public class InterfazPrincipal extends JFrame{
         frame.setResizable(true);
         frame.setLocationRelativeTo(null);
         ImageIcon iconEmpresa = new ImageIcon(getClass().getResource("/images/SpeedLab LOGO.png"));
-        frame.setIconImage(iconEmpresa.getImage().getScaledInstance(iconScale,iconScale,Image.SCALE_SMOOTH));
+        frame.setIconImage(iconEmpresa.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE,Image.SCALE_SMOOTH));
 
         //botones interfaz
         empresaLOGO.setIcon(new ImageIcon(iconEmpresa.getImage().getScaledInstance(200,200,Image.SCALE_SMOOTH)));
         ImageIcon iconServicios = new ImageIcon(getClass().getResource("/images/calendario.png"));
         ImageIcon iconProductos = new ImageIcon(getClass().getResource("/images/productos.png"));
-        serviciosButton.setIcon(new ImageIcon(iconServicios.getImage().getScaledInstance(iconScale,iconScale,Image.SCALE_SMOOTH)));
-        productosButton.setIcon(new ImageIcon(iconProductos.getImage().getScaledInstance(iconScale,iconScale,Image.SCALE_SMOOTH)));
+        serviciosButton.setIcon(new ImageIcon(iconServicios.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE,Image.SCALE_SMOOTH)));
+        productosButton.setIcon(new ImageIcon(iconProductos.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE,Image.SCALE_SMOOTH)));
 
 
 
 
         ImageIcon iconUsuario = new ImageIcon(getClass().getResource("/images/usuario.png"));
-        cerrarSesiónButton.setIcon(new ImageIcon(iconUsuario.getImage().getScaledInstance(iconScale,iconScale,Image.SCALE_SMOOTH)));
+        cerrarSesiónButton.setIcon(new ImageIcon(iconUsuario.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE,Image.SCALE_SMOOTH)));
         cerrarSesiónButton.addActionListener(e -> {
             frame.dispose();
             new InterfazCuenta();
@@ -72,8 +72,8 @@ public class InterfazPrincipal extends JFrame{
         //iconos de redes sociales
         ImageIcon iconWssp = new ImageIcon(getClass().getResource("/images/wssp LOGO.png"));
         ImageIcon iconIg = new ImageIcon(getClass().getResource("/images/ig LOGO.png"));
-        instragramButton.setIcon(new ImageIcon(iconIg.getImage().getScaledInstance(iconScale,iconScale,Image.SCALE_SMOOTH)));
-        whatsAppButton.setIcon(new ImageIcon(iconWssp.getImage().getScaledInstance(iconScale,iconScale,Image.SCALE_SMOOTH)));
+        instragramButton.setIcon(new ImageIcon(iconIg.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE,Image.SCALE_SMOOTH)));
+        whatsAppButton.setIcon(new ImageIcon(iconWssp.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE,Image.SCALE_SMOOTH)));
 
         instragramButton.addActionListener(ActionListener->{
             try {

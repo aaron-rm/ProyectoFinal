@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class InterfazCuenta extends JFrame{
-    private int iconScale = 30;
+    private final int ICON_SCALE = 30;
     private JPanel InterfazPrincipal;
     private JTextField usuarioTextField;
     private JTextField contraseñaTextField;
@@ -26,7 +26,7 @@ public class InterfazCuenta extends JFrame{
         frame.setResizable(true);
         frame.setLocationRelativeTo(null);
         ImageIcon iconEmpresa = new ImageIcon(getClass().getResource("/images/SpeedLab LOGO.png"));
-        frame.setIconImage(iconEmpresa.getImage().getScaledInstance(iconScale,iconScale, Image.SCALE_SMOOTH));
+        frame.setIconImage(iconEmpresa.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH));
 
 
 
