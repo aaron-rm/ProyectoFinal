@@ -12,6 +12,26 @@ class ValidadorEntrada {
         try {
             int opcion = Integer.parseInt(entrada.trim());
 
+            if (opcion < 1 || opcion > 9) {
+                throw new EntradaInvalidaException("La opción debe estar entre 1 y 9");
+            }
+
+            return opcion;
+
+        } catch (NumberFormatException e) {
+            throw new EntradaInvalidaException("Por favor, ingrese un número válido");
+        }
+    }
+
+    // Validar opción del menú de carrito
+    public static int validarOpcionCarrito(String entrada) throws EntradaInvalidaException {
+        if (entrada == null || entrada.trim().isEmpty()) {
+            throw new EntradaInvalidaException("La entrada no puede estar vacía");
+        }
+
+        try {
+            int opcion = Integer.parseInt(entrada.trim());
+
             if (opcion < 1 || opcion > 6) {
                 throw new EntradaInvalidaException("La opción debe estar entre 1 y 6");
             }
@@ -40,6 +60,30 @@ class ValidadorEntrada {
 
         } catch (NumberFormatException e) {
             throw new EntradaInvalidaException("Por favor, ingrese un número válido para el ID");
+        }
+    }
+
+    // Validar cantidad
+    public static int validarCantidad(String entrada) throws EntradaInvalidaException {
+        if (entrada == null || entrada.trim().isEmpty()) {
+            throw new EntradaInvalidaException("La cantidad no puede estar vacía");
+        }
+
+        try {
+            int cantidad = Integer.parseInt(entrada.trim());
+
+            if (cantidad <= 0) {
+                throw new EntradaInvalidaException("La cantidad debe ser mayor a 0");
+            }
+
+            if (cantidad > 100) {
+                throw new EntradaInvalidaException("La cantidad no puede ser mayor a 100");
+            }
+
+            return cantidad;
+
+        } catch (NumberFormatException e) {
+            throw new EntradaInvalidaException("Por favor, ingrese un número válido para la cantidad");
         }
     }
 

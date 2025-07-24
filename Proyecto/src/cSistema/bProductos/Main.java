@@ -7,10 +7,12 @@ import java.io.InputStreamReader;
 // Clase Principal
 public class Main {
     private static CatalogoManager catalogoManager;
+    private static Carrito carrito;
     private static BufferedReader reader;
 
     public static void main(String[] args) {
         catalogoManager = new CatalogoManager();
+        carrito = new Carrito();
         reader = new BufferedReader(new InputStreamReader(System.in));
 
         try {
@@ -48,6 +50,15 @@ public class Main {
                         mostrarProductoMasBarato();
                         break;
                     case 6:
+                        agregarProductoAlCarrito();
+                        break;
+                    case 7:
+                        gestionarCarrito();
+                        break;
+                    case 8:
+                        carrito.mostrarCarrito();
+                        break;
+                    case 9:
                         System.out.println("\n¡Gracias por usar nuestro catálogo! 🚗✨");
                         continuar = false;
                         break;
@@ -74,14 +85,26 @@ public class Main {
         System.out.println("\n" + "=".repeat(60));
         System.out.println("🚗 CATÁLOGO DE PRODUCTOS PARA LAVADO DE AUTOS 🚗");
         System.out.println("=".repeat(60));
+        System.out.println("📋 CATÁLOGO:");
         System.out.println("1. Ver todos los productos");
         System.out.println("2. Buscar producto por ID");
         System.out.println("3. Filtrar por categoría");
         System.out.println("4. Ver producto más caro");
         System.out.println("5. Ver producto más barato");
-        System.out.println("6. Salir");
+        System.out.println("\n🛒 CARRITO DE COMPRAS:");
+        System.out.println("6. Agregar producto al carrito");
+        System.out.println("7. Gestionar carrito");
+        System.out.println("8. Ver carrito");
+        System.out.println("\n9. Salir");
         System.out.println("=".repeat(60));
-        System.out.print("Seleccione una opción (1-6): ");
+
+        // Mostrar indicador del carrito
+        if (!carrito.estaVacio()) {
+            System.out.printf("🛒 Carrito: %d productos | Total: $%.2f\n",
+                    carrito.getCantidadTotalProductos(), carrito.calcularTotal());
+        }
+
+        System.out.print("Seleccione una opción (1-9): ");
     }
 
     private static void buscarProductoPorId() throws IOException {
@@ -164,6 +187,211 @@ public class Main {
 
         } catch (ProductoNoEncontradoException e) {
             System.err.println("❌ " + e.getMessage());
+        }
+    }
+
+    private static void agregarProductoAlCarrito() throws IOException {
+        try {
+            System.out.print("\n🛒 Ingrese el ID del producto a agregar (1-" +
+                    catalogoManager.getTotalProductos() + "): ");
+            String entradaId = reader.readLine();
+            int id = ValidadorEntrada.validarId(entradaId, catalogoManager.getTotalProductos());
+
+            Producto producto = catalogoManager.buscarProductoPorId(id);
+
+            System.out.print("📦 Ingrese la cantidad: ");
+            String entradaCantidad = reader.readLine();
+            int cantidad = ValidadorEntrada.validarCantidad(entradaCantidad);
+
+            carrito.agregarProducto(producto, cantidad);
+
+            System.out.println("\n✅ ¡Producto agregado al carrito exitosamente!");
+            System.out.printf("• %s (Cantidad: %d)\n", producto.getNombre(), cantidad);
+            System.out.printf("• Subtotal: $%.2f\n", producto.getPrecio() * cantidad);
+            System.out.printf("• Total del carrito: $%.2f\n", carrito.calcularTotal());
+
+        } catch (EntradaInvalidaException e) {
+            System.out.println("❌ " + e.getMessage());
+        } catch (ProductoNoEncontradoException e) {
+            System.out.println("❌ " + e.getMessage());
+        } catch (CarritoException e) {
+            System.out.println("❌ " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("❌ Error de lectura: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    private static void gestionarCarrito() throws IOException {
+        boolean continuar = true;
+
+        while (continuar) {
+            try {
+                mostrarMenuCarrito();
+                String entrada = reader.readLine();
+                int opcion = ValidadorEntrada.validarOpcionCarrito(entrada);
+
+                switch (opcion) {
+                    case 1:
+                        carrito.mostrarCarrito();
+                        break;
+                    case 2:
+                        eliminarProductoDelCarrito();
+                        break;
+                    case 3:
+                        modificarCantidadEnCarrito();
+                        break;
+                    case 4:
+                        vaciarCarritoCompleto();
+                        break;
+                    case 5:
+                        procesarCompraCarrito();
+                        break;
+                    case 6:
+                        continuar = false;
+                        break;
+                }
+
+                if (continuar) {
+                    esperarEnter();
+                }
+
+            } catch (EntradaInvalidaException e) {
+                System.out.println("\n❌ " + e.getMessage());
+                esperarEnter();
+            } catch (IOException e) {
+                System.err.println("❌ Error de lectura: " + e.getMessage());
+                throw e;
+            } catch (Exception e) {
+                System.err.println("❌ Error inesperado: " + e.getMessage());
+                esperarEnter();
+            }
+        }
+    }
+
+    private static void mostrarMenuCarrito() {
+        System.out.println("\n" + "=".repeat(60));
+        System.out.println("🛒 GESTIÓN DEL CARRITO DE COMPRAS");
+        System.out.println("=".repeat(60));
+        System.out.println("1. Ver contenido del carrito");
+        System.out.println("2. Eliminar producto del carrito");
+        System.out.println("3. Modificar cantidad de un producto");
+        System.out.println("4. Vaciar carrito completo");
+        System.out.println("5. Procesar compra");
+        System.out.println("6. Volver al menú principal");
+        System.out.println("=".repeat(60));
+
+        if (!carrito.estaVacio()) {
+            System.out.printf("🛒 Estado: %d productos | Total: $%.2f\n",
+                    carrito.getCantidadTotalProductos(), carrito.calcularTotal());
+        } else {
+            System.out.println("🛒 Estado: Carrito vacío");
+        }
+
+        System.out.print("Seleccione una opción (1-6): ");
+    }
+
+    private static void eliminarProductoDelCarrito() throws IOException {
+        try {
+            if (carrito.estaVacio()) {
+                System.out.println("\n❌ El carrito está vacío");
+                return;
+            }
+
+            carrito.mostrarCarrito();
+            System.out.print("\n🗑️ Ingrese el ID del producto a eliminar: ");
+            String entrada = reader.readLine();
+            int id = ValidadorEntrada.validarId(entrada, catalogoManager.getTotalProductos());
+
+            carrito.eliminarProducto(id);
+            System.out.println("\n✅ ¡Producto eliminado del carrito exitosamente!");
+
+        } catch (EntradaInvalidaException e) {
+            System.out.println("❌ " + e.getMessage());
+        } catch (CarritoException e) {
+            System.out.println("❌ " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("❌ Error de lectura: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    private static void modificarCantidadEnCarrito() throws IOException {
+        try {
+            if (carrito.estaVacio()) {
+                System.out.println("\n❌ El carrito está vacío");
+                return;
+            }
+
+            carrito.mostrarCarrito();
+            System.out.print("\n📝 Ingrese el ID del producto a modificar: ");
+            String entradaId = reader.readLine();
+            int id = ValidadorEntrada.validarId(entradaId, catalogoManager.getTotalProductos());
+
+            System.out.print("📦 Ingrese la nueva cantidad: ");
+            String entradaCantidad = reader.readLine();
+            int cantidad = ValidadorEntrada.validarCantidad(entradaCantidad);
+
+            carrito.modificarCantidad(id, cantidad);
+            System.out.println("\n✅ ¡Cantidad modificada exitosamente!");
+
+        } catch (EntradaInvalidaException e) {
+            System.out.println("❌ " + e.getMessage());
+        } catch (CarritoException e) {
+            System.out.println("❌ " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("❌ Error de lectura: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    private static void vaciarCarritoCompleto() throws IOException {
+        try {
+            if (carrito.estaVacio()) {
+                System.out.println("\n❌ El carrito ya está vacío");
+                return;
+            }
+
+            System.out.print("\n⚠️ ¿Está seguro de que desea vaciar todo el carrito? (s/n): ");
+            String confirmacion = reader.readLine().trim().toLowerCase();
+
+            if (confirmacion.startsWith("s")) {
+                carrito.vaciarCarrito();
+                System.out.println("\n✅ ¡Carrito vaciado exitosamente!");
+            } else {
+                System.out.println("\n❌ Operación cancelada");
+            }
+
+        } catch (IOException e) {
+            System.err.println("❌ Error de lectura: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    private static void procesarCompraCarrito() throws IOException {
+        try {
+            if (carrito.estaVacio()) {
+                System.out.println("\n❌ No se puede procesar una compra con el carrito vacío");
+                return;
+            }
+
+            System.out.print("\n💳 ¿Confirma que desea procesar la compra? (s/n): ");
+            String confirmacion = reader.readLine().trim().toLowerCase();
+
+            if (confirmacion.startsWith("s")) {
+                carrito.procesarCompra();
+                System.out.println("\n🎊 ¡Su pedido ha sido procesado exitosamente!");
+                System.out.println("📧 Recibirá un email de confirmación en breve");
+                System.out.println("🚚 El tiempo estimado de entrega es de 3-5 días hábiles");
+            } else {
+                System.out.println("\n❌ Compra cancelada");
+            }
+
+        } catch (CarritoException e) {
+            System.out.println("❌ " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("❌ Error de lectura: " + e.getMessage());
+            throw e;
         }
     }
 
