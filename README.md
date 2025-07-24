@@ -21,4 +21,4 @@
   - [x] Nombres de variables y objetos: camelCase
   - [x] Nombres de funciones: camelCase
   - [x] Clases: PascalCase
-  - [ ] Constantes: SNAKE_CASE (con mayúsculas) 
+  - [x] Constantes: SNAKE_CASE (con mayúsculas) 
