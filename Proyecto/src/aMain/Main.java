@@ -1,6 +1,6 @@
 package aMain;
 
-import bInterfaz.InterfazPrincipal;
+import bInterfaz.InterfazCuenta;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,12 +22,21 @@ public class Main extends JFrame {
     private JLabel txtLABEL;
     private JLabel textoSuperior;
 
+
     public Main(){
+        //frame principal
+        JFrame frame = new JFrame("Proyecto Final");
+        frame.setVisible(true);
+        frame.setContentPane(getJPanelInicio());
+        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+        frame.setSize(720,480);
+        frame.setResizable(true);
+        frame.setLocationRelativeTo(null);
 
         //ir a la pantalla principal
         iniciarButton.addActionListener(ActionListener->{
-
-            new InterfazPrincipal();
+            frame.dispose();
+            new InterfazCuenta();
 
         });
 
@@ -43,13 +52,7 @@ public class Main extends JFrame {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Proyecto Final");
-        frame.setVisible(true);
-        frame.setContentPane(new Main().getJPanelInicio());
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-        frame.setSize(720,480);
-        frame.setResizable(true);
-        frame.setLocationRelativeTo(null);
+        new Main();
     }
 
     private JPanel getJPanelInicio() {

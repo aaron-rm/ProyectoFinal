@@ -1,30 +1,32 @@
 package bInterfaz;
 
-import cSistema.aUsuario.Cliente;
-
 import javax.swing.*;
 import java.awt.*;
 
-public class InterfazServicios {
+public class InterfazProductosCarroDeCompras {
     private int iconScale = 30;
-    private JPanel InterfazPrincipal;
     private JButton cerrarSesiónButton;
     private JButton volverButton;
-    private JButton verificarDisponibilidadButton;
+    private JPanel InterfazPrincipal;
 
 
-    public InterfazServicios(Cliente cliente){
+    public InterfazProductosCarroDeCompras() {
         //frame principal
-        JFrame frame = new JFrame("\uD835\uDE4E\uD835\uDE65\uD835\uDE5A\uD835\uDE5A\uD835\uDE59\uD835\uDE47\uD835\uDE56\uD835\uDE57 | Servicios");
+        JFrame frame = new JFrame("\uD835\uDE4E\uD835\uDE65\uD835\uDE5A\uD835\uDE5A\uD835\uDE59\uD835\uDE47\uD835\uDE56\uD835\uDE57 | Carro de Compras");
         frame.setVisible(true);
         frame.setContentPane(getInterfazPrincipal());
-        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(frame.DISPOSE_ON_CLOSE);
         frame.setSize(720,480);
         frame.setResizable(true);
         frame.setLocationRelativeTo(null);
         ImageIcon iconEmpresa = new ImageIcon(getClass().getResource("/images/SpeedLab LOGO.png"));
         frame.setIconImage(iconEmpresa.getImage().getScaledInstance(iconScale,iconScale, Image.SCALE_SMOOTH));
 
+
+
+        volverButton.addActionListener(e -> {
+           frame.dispose();
+        });
 
 
         ImageIcon iconUsuario = new ImageIcon(getClass().getResource("/images/usuario.png"));
@@ -34,13 +36,7 @@ public class InterfazServicios {
             new InterfazCuenta();
         });
 
-        volverButton.addActionListener(e -> {
-            frame.dispose();
-            new InterfazPrincipal(cliente);
-        });
     }
-
-
 
 
     public JPanel getInterfazPrincipal() {

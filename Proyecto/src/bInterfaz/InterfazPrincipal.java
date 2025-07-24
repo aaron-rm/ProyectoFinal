@@ -1,12 +1,10 @@
 package bInterfaz;
 
 
-import aMain.Main;
+import cSistema.aUsuario.Cliente;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,9 +17,13 @@ public class InterfazPrincipal extends JFrame{
     private JLabel empresaLOGO;
     private JButton productosButton;
     private JButton serviciosButton;
+    private JButton cerrarSesiónButton;
+    private JButton salirButton;
     private int iconScale = 30;
+    private boolean sesionIniciada=false;
+    private Cliente cliente;
 
-    public InterfazPrincipal (){
+    public InterfazPrincipal (Cliente cliente){
         //frame principal
         JFrame frame = new JFrame("\uD835\uDE4E\uD835\uDE65\uD835\uDE5A\uD835\uDE5A\uD835\uDE59\uD835\uDE47\uD835\uDE56\uD835\uDE57 | Detailing, Pulidos y Más");
         frame.setVisible(true);
@@ -40,12 +42,30 @@ public class InterfazPrincipal extends JFrame{
         serviciosButton.setIcon(new ImageIcon(iconServicios.getImage().getScaledInstance(iconScale,iconScale,Image.SCALE_SMOOTH)));
         productosButton.setIcon(new ImageIcon(iconProductos.getImage().getScaledInstance(iconScale,iconScale,Image.SCALE_SMOOTH)));
 
+
+
+
+        ImageIcon iconUsuario = new ImageIcon(getClass().getResource("/images/usuario.png"));
+        cerrarSesiónButton.setIcon(new ImageIcon(iconUsuario.getImage().getScaledInstance(iconScale,iconScale,Image.SCALE_SMOOTH)));
+        cerrarSesiónButton.addActionListener(e -> {
+            frame.dispose();
+            new InterfazCuenta();
+        });
+
+
+
         serviciosButton.addActionListener(ActionListener->{
-           new InterfazServicios();
+            frame.dispose();
+            new InterfazServicios(cliente);
+
+
         });
 
         productosButton.addActionListener(ActionListener->{
-            new InterfazProductos();
+            frame.dispose();
+            new InterfazProductos(cliente);
+
+
         });
 
         //botones de redes sociales
@@ -78,10 +98,17 @@ public class InterfazPrincipal extends JFrame{
         });
 
 
+        salirButton.addActionListener(e -> {
+            System.exit(0);
+        });
     }
 
 
     public JPanel getInterfazPrincipal() {
         return InterfazPrincipal;
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }

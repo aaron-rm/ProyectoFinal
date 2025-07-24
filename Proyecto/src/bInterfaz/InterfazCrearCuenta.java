@@ -1,0 +1,48 @@
+package bInterfaz;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class InterfazCrearCuenta {
+    private int iconScale = 30;
+    private JPanel InterfazPrincipal;
+    private JButton limpiarCamposButton;
+    private JButton crearCuentaButton;
+
+
+
+    public InterfazCrearCuenta() {
+        //frame principal
+        JFrame frame = new JFrame("\uD835\uDE4E\uD835\uDE65\uD835\uDE5A\uD835\uDE5A\uD835\uDE59\uD835\uDE47\uD835\uDE56\uD835\uDE57 | Crear Cuenta");
+        frame.setVisible(true);
+        frame.setContentPane(getInterfazPrincipal());
+        frame.setDefaultCloseOperation(frame.DISPOSE_ON_CLOSE);
+        frame.setSize(720,480);
+        frame.setResizable(true);
+        frame.setLocationRelativeTo(null);
+        ImageIcon iconEmpresa = new ImageIcon(getClass().getResource("/images/SpeedLab LOGO.png"));
+        frame.setIconImage(iconEmpresa.getImage().getScaledInstance(iconScale,iconScale, Image.SCALE_SMOOTH));
+
+
+
+
+        limpiarCamposButton.addActionListener(e -> {
+            //vaciar todos los campos
+
+        });
+
+        crearCuentaButton.addActionListener(e -> {
+            //crear una cuenta
+
+
+            JOptionPane.showMessageDialog(null, "Cuenta creada con éxito");
+            frame.dispose();
+        });
+    }
+
+
+
+    public JPanel getInterfazPrincipal() {
+        return InterfazPrincipal;
+    }
+}
