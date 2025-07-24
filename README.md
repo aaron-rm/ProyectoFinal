@@ -4,7 +4,7 @@
 
 - [x] Su programa debe desarrollarse bajo el concepto de Programación Orientada a Objetos. 
 
-- [ ] Dentro de su programa debe incluir condiciones (if o cases), ciclos de repetición (for o while). 
+- [x] Dentro de su programa debe incluir condiciones (if o cases), ciclos de repetición (for o while). 
 
 - [x] Explore el modo gráfico de Java, Sea creativo en el diseño. Cuide la ortografía. 
 
