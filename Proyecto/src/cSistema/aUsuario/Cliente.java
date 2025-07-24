@@ -1,6 +1,5 @@
 package cSistema.aUsuario;
 
-
 public class Cliente {
   private String id;
     private String nombre;
@@ -30,9 +29,6 @@ public class Cliente {
         return correoElectronico;
     }
 
-    /**
-     * Muestra información básica del cliente en consola.
-     */
     public void mostrarInfoCliente() {
         System.out.println("Cliente ID: " + id);
         System.out.println("Nombre: " + nombre);
