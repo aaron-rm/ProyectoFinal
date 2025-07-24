@@ -14,7 +14,7 @@
 
 - [x] Su pantalla de inicio debe ser la página de presentación, donde pondrá nombre de la Universidad, Facultad (incluya ambos logos en imagen) carrera, grupo, nombre y cédula de los integrantes, nombre del profesor y fecha de entrega. 
 
-- [ ] Haga los comentarios que considere pertinentes en el desarrollo del código. 
+- [x] Haga los comentarios que considere pertinentes en el desarrollo del código. 
 
 - #### Utilice las convenciones de códigos: 
 
