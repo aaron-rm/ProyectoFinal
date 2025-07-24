@@ -1,7 +1,7 @@
 package cSistema.bProductos;
 
 // Clase Producto
-class Producto {
+public class Producto {
     private int id;
     private String nombre;
     private String descripcion;

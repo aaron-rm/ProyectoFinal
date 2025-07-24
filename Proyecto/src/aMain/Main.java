@@ -37,7 +37,6 @@ public class Main extends JFrame {
         iniciarButton.addActionListener(ActionListener->{
             frame.dispose();
             new InterfazCuenta();
-
         });
 
         salirButton.addActionListener(ActionListener->{

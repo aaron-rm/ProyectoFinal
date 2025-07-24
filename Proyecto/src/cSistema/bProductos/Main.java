@@ -107,6 +107,7 @@ public class Main {
         System.out.print("Seleccione una opción (1-9): ");
     }
 
+
     private static void buscarProductoPorId() throws IOException {
         try {
             System.out.print("\n🔍 Ingrese el ID del producto a buscar (1-" +
@@ -129,6 +130,10 @@ public class Main {
             throw e;
         }
     }
+
+
+
+
 
     private static void filtrarPorCategoria() throws IOException {
         try {
@@ -163,6 +168,8 @@ public class Main {
             throw e;
         }
     }
+
+
 
     private static void mostrarProductoMasCaro() {
         try {

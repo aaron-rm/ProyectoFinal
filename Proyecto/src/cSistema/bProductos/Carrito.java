@@ -1,7 +1,7 @@
 package cSistema.bProductos;
 
 // Clase Carrito
-class Carrito {
+public class Carrito {
     private ItemCarrito[] items;
     private int totalItems;
     private final int MAX_ITEMS = 50;
@@ -116,6 +116,22 @@ class Carrito {
         System.out.printf("• Cantidad total de productos: %d\n", getCantidadTotalProductos());
         System.out.printf("• TOTAL A PAGAR: $%.2f\n", calcularTotal());
         System.out.println("=".repeat(60));
+    }
+    //impresion en grafico
+    public String imprimirCarrito(){
+        if (estaVacio()) {
+            return "\n🛒 El carrito está vacío";
+        }else {
+            String inicio = String.format("\n🛒 CONTENIDO DEL CARRITO:","=".repeat(60));
+            String contenido = "\n\n";
+            for (int i = 0; i < totalItems; i++) {
+                contenido += items[i].toString();
+                contenido += "\n";
+            }
+            String fin = String.format("\n• TOTAL A PAGAR: $%.2f\n", calcularTotal(),"=".repeat(60));
+
+            return (inicio+contenido+fin);
+        }
     }
 
     // Procesar compra

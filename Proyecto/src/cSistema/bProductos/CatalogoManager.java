@@ -1,8 +1,10 @@
 package cSistema.bProductos;
 
+import javax.swing.*;
+
 // Clase CatalogoManager
-class CatalogoManager {
-    private Producto[] productos;
+public class CatalogoManager {
+    public Producto[] productos;
     private int totalProductos;
     private final int MAX_PRODUCTOS = 10;
 
@@ -45,6 +47,9 @@ class CatalogoManager {
 
         System.out.printf("\nTotal de productos: %d\n", totalProductos);
     }
+    public String infoProducto(int n){
+        return  productos[n].toString();
+    }
 
     // Buscar producto por ID
     public Producto buscarProductoPorId(int id) throws ProductoNoEncontradoException {
@@ -83,6 +88,14 @@ class CatalogoManager {
     }
 
     // Obtener producto más caro
+    public String productoMasCaro(){
+        try {
+            return obtenerProductoMasCaro().toString();
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "No se encontro el producto mas caro");
+        }
+        return "";
+    }
     public Producto obtenerProductoMasCaro() throws ProductoNoEncontradoException {
         if (totalProductos == 0) {
             throw new ProductoNoEncontradoException("No hay productos disponibles");
@@ -99,6 +112,14 @@ class CatalogoManager {
     }
 
     // Obtener producto más barato
+    public String productoMasBarato(){
+        try {
+        return obtenerProductoMasBarato().toString();
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "No se encontro el producto mas caro");
+        }
+        return "";
+    }
     public Producto obtenerProductoMasBarato() throws ProductoNoEncontradoException {
         if (totalProductos == 0) {
             throw new ProductoNoEncontradoException("No hay productos disponibles");
