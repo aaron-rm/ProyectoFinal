@@ -8,7 +8,7 @@ package cSistema.bProductos;
 //+ void verCarrito()
 
 
-//AGREGAR OPCION PARA PAGAR CON PUNTOS
+
 
 
 public class CarritoDeCompra {
