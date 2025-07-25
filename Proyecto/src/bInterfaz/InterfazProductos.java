@@ -34,19 +34,18 @@ public class InterfazProductos {
         ImageIcon iconEmpresa = new ImageIcon(getClass().getResource("/images/SpeedLab LOGO.png"));
         frame.setIconImage(iconEmpresa.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH));
 
-
-
+        //panel de resultados
         CatalogoManager catalogo = new CatalogoManager();
         int cantProductos = catalogo.getTotalProductos();
         panelContenido = new JPanel();
         panelContenido.setLayout(new BoxLayout(panelContenido, BoxLayout.Y_AXIS));
-
         JScrollPane scrollPane = new JScrollPane(panelContenido);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-
         resultadosProductos.setLayout(new BorderLayout());
         resultadosProductos.add(scrollPane, BorderLayout.CENTER);
         panelContenido.setVisible(false);
+
+
         //ver resultado del filtro
         actualizarResultadosButton.addActionListener(e -> {
             panelContenido.setVisible(true);
@@ -79,17 +78,15 @@ public class InterfazProductos {
                     eleccionProducto.setSelectedIndex(3);
 
                 } break;
-
                 default:{
                     JOptionPane.showMessageDialog(null,"Error en la selección");
                 }
             }
-
             resultadosProductos.revalidate();
             resultadosProductos.repaint();
         });
 
-        Carrito carrito = new Carrito();
+        //agregar al carrito
         agregarAlCarritoButton.addActionListener(e -> {
             try {
                 int id = (Integer.parseInt((eleccionProducto.getSelectedItem().toString())));
@@ -109,15 +106,12 @@ public class InterfazProductos {
             new InterfazProductosCarroDeCompras(usuarioActual);
         });
 
+        //volver al menu
         volverAlMenúPrincipalButton.addActionListener(e-> {
             frame.dispose();
             new InterfazPrincipal(usuarios,citas,cantUsuariosActuales);
         });
     }
-
-
-
-
 
     public JPanel getInterfazPrincipal() {
         return InterfazPrincipal;

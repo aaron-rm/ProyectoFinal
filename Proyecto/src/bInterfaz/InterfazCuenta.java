@@ -35,22 +35,23 @@ public class InterfazCuenta extends JFrame{
 
         this.cantUsuariosActuales = cantUsuarios;
 
-
+        //volver al menu
         volverAlMenúPrincipalButton.addActionListener(e->{
             frame.dispose();
             new InterfazPrincipal(usuarios, citas, cantUsuariosActuales);
         });
-        iniciarSesiónButton.addActionListener(e -> {
 
+        //iniciar sesion
+        iniciarSesiónButton.addActionListener(e -> {
             try {
                 String user = usuarioTextField.getText().trim();
                 String contrasenia = contraseñaTextField.getText().trim();
                 boolean seleccionUsuario=false;
-                if (user.matches("") || contrasenia.matches("")){
+                if (user.matches("") || contrasenia.matches(""))
+                {
                     throw new RuntimeException("Rellene todos los datos");
-                }else {
-
-
+                }else
+                {
                     for (int i = 0; i < cantUsuariosActuales; i++) {
                         if (usuarios[i].getIdCuenta().equals(user) && usuarios[i].getPassword().equals(contrasenia)) {
                             usuario = usuarios[i];
@@ -61,9 +62,9 @@ public class InterfazCuenta extends JFrame{
                             seleccionUsuario = false;
                         }
                     }
-
                 }
-                if(seleccionUsuario){
+                if(seleccionUsuario)
+                {
                     JOptionPane.showMessageDialog(this,"Bienvenido "+usuario.cliente.getNombre());
                 }else {
                     throw new RuntimeException("No se ha encontrado ninguna cuenta");
@@ -85,9 +86,11 @@ public class InterfazCuenta extends JFrame{
             contraseñaTextField.setText("");
         });
 
+        //salir
         salirButton.addActionListener(e -> {
            System.exit(0);
         });
+
 
         crearCuentaButton.addActionListener(e -> {
             //crear una cuenta
@@ -96,12 +99,14 @@ public class InterfazCuenta extends JFrame{
             }else{
                 InterfazCrearCuenta cuenta = new InterfazCrearCuenta(frame);
                 cuenta.setVisible(true);
-
                 boolean estado = cuenta.getEstado();
-                if(estado){
+
+                if(estado)
+                {
                     usuarios[cantUsuariosActuales] = cuenta.getCuenta();
                     cantUsuariosActuales+=1;
                     usuario = cuenta.getCuenta();
+
                     int opcion = JOptionPane.showConfirmDialog(
                             null,
                             "¿Deseas iniciar sesión con la cuenta creada?",
@@ -114,15 +119,9 @@ public class InterfazCuenta extends JFrame{
                         new InterfazProductos(usuarios,citas,usuario,cantUsuariosActuales);
                     }
                 }
-
             }
-
         });
     }
-
-
-
-
 
     public JPanel getInterfazPrincipal() {
         return InterfazPrincipal;

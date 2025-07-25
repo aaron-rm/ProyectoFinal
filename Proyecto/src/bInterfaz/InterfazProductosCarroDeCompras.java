@@ -28,21 +28,23 @@ public class InterfazProductosCarroDeCompras {
         ImageIcon iconEmpresa = new ImageIcon(getClass().getResource("/images/SpeedLab LOGO.png"));
         frame.setIconImage(iconEmpresa.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH));
 
+        //imprimir informacion del carrito
         resumenCarrito.setText(usuario.carrito.imprimirCarrito());
-
         txtInfoCliente.setText(usuario.cliente.imprimirInfoCliente());
 
+        //volver
         volverButton.addActionListener(e -> {
            frame.dispose();
         });
 
+        //vaciar el carrito
         vaciarCarritoButton.addActionListener(e -> {
             usuario.carrito.vaciarCarrito();
             resumenCarrito.setText(usuario.carrito.imprimirCarrito());
             JOptionPane.showMessageDialog(null, "Carrito Vaciado con Éxito");
         });
 
-
+        //realizar el pedido
         realizarPedidoButton.addActionListener(e -> {
             if (usuario.carrito.estaVacio()) {
                 JOptionPane.showMessageDialog(null, "El carrito está vacio");
@@ -54,10 +56,7 @@ public class InterfazProductosCarroDeCompras {
             JOptionPane.showMessageDialog(null, "Compra Realizada con Éxito");
             }
         });
-
-
     }
-
 
     public JPanel getInterfazPrincipal() {
         return InterfazPrincipal;

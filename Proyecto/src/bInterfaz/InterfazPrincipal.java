@@ -45,24 +45,26 @@ public class InterfazPrincipal extends JFrame{
         serviciosButton.setIcon(new ImageIcon(iconServicios.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE,Image.SCALE_SMOOTH)));
         productosButton.setIcon(new ImageIcon(iconProductos.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE,Image.SCALE_SMOOTH)));
 
-
+        //ir a servicios
         serviciosButton.addActionListener(ActionListener->{
             frame.dispose();
             new InterfazCita(usuarios, citas,cantUsuariosActuales);
         });
 
+        //ir a productos
         productosButton.addActionListener(ActionListener->{
             frame.dispose();
             new InterfazCuenta(usuarios, citas, cantUsuariosActuales);
         });
 
-        //botones de redes sociales
+
         //iconos de redes sociales
         ImageIcon iconWssp = new ImageIcon(getClass().getResource("/images/wssp LOGO.png"));
         ImageIcon iconIg = new ImageIcon(getClass().getResource("/images/ig LOGO.png"));
         instragramButton.setIcon(new ImageIcon(iconIg.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE,Image.SCALE_SMOOTH)));
         whatsAppButton.setIcon(new ImageIcon(iconWssp.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE,Image.SCALE_SMOOTH)));
 
+        //botones de redes sociales
         instragramButton.addActionListener(ActionListener->{
             try {
                 URI googleUri = new URI("https://www.instagram.com/spdlabs/");
@@ -85,7 +87,7 @@ public class InterfazPrincipal extends JFrame{
             }
         });
 
-
+        //salir
         salirButton.addActionListener(e -> {
             System.exit(0);
         });
@@ -94,9 +96,5 @@ public class InterfazPrincipal extends JFrame{
 
     public JPanel getInterfazPrincipal() {
         return InterfazPrincipal;
-    }
-
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
     }
 }

@@ -1,6 +1,5 @@
 package aMain;
 
-import bInterfaz.InterfazCuenta;
 import bInterfaz.InterfazPrincipal;
 import cSistema.aUsuario.Cliente;
 import cSistema.aUsuario.Cuenta;
@@ -24,8 +23,6 @@ public class Main extends JFrame {
     private JLabel logoUTP;
     private JLabel logoFISC;
     private JButton salirButton;
-    private JLabel txtLABEL;
-    private JLabel textoSuperior;
     private int cantUsuariosActuales = 0;
 
 
@@ -38,6 +35,12 @@ public class Main extends JFrame {
         frame.setSize(720,480);
         frame.setResizable(true);
         frame.setLocationRelativeTo(null);
+
+        //iconos
+        ImageIcon iconFisc = new ImageIcon(getClass().getResource("/images/FISC logo.png"));
+        ImageIcon iconUTP = new ImageIcon(getClass().getResource("/images/UTP logo.png"));
+        logoFISC.setIcon(new ImageIcon(iconFisc.getImage().getScaledInstance(100,100,Image.SCALE_SMOOTH)));
+        logoUTP.setIcon(new ImageIcon(iconUTP.getImage().getScaledInstance(100,100,Image.SCALE_SMOOTH)));
 
         //ir a la pantalla principal
         iniciarButton.addActionListener(ActionListener->{
@@ -61,10 +64,6 @@ public class Main extends JFrame {
         });
 
 
-        ImageIcon iconFisc = new ImageIcon(getClass().getResource("/images/FISC logo.png"));
-        ImageIcon iconUTP = new ImageIcon(getClass().getResource("/images/UTP logo.png"));
-        logoFISC.setIcon(new ImageIcon(iconFisc.getImage().getScaledInstance(100,100,Image.SCALE_SMOOTH)));
-        logoUTP.setIcon(new ImageIcon(iconUTP.getImage().getScaledInstance(100,100,Image.SCALE_SMOOTH)));
     }
 
     public static void main(String[] args) {

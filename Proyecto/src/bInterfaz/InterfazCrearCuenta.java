@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class InterfazCrearCuenta extends JDialog {
+
     private final int ICON_SCALE = 30;
     private JPanel InterfazPrincipal;
     private JButton limpiarCamposButton;
@@ -57,7 +58,6 @@ public class InterfazCrearCuenta extends JDialog {
                 verificado = true;
             }catch (NullPointerException exception){
                 JOptionPane.showMessageDialog(null,exception.getMessage());
-
             }
 
             if(verificado){
@@ -75,14 +75,16 @@ public class InterfazCrearCuenta extends JDialog {
         });
     }
 
+    //getters
     public boolean getEstado(){
         return estado;
     }
 
-
     public Cuenta getCuenta() {
         return cuenta;
     }
+
+    //validaciones
     public int validarTelefono(String texto){
         int num=0;
         if (texto.equals("")){
