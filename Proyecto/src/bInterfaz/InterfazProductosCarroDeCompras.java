@@ -16,7 +16,7 @@ public class InterfazProductosCarroDeCompras {
     private JTextArea txtInfoCliente;
 
 
-    public InterfazProductosCarroDeCompras(Cuenta cliente) {
+    public InterfazProductosCarroDeCompras(Cuenta usuario) {
         //frame principal
         JFrame frame = new JFrame("\uD835\uDE4E\uD835\uDE65\uD835\uDE5A\uD835\uDE5A\uD835\uDE59\uD835\uDE47\uD835\uDE56\uD835\uDE57 | Carro de Compras");
         frame.setVisible(true);
@@ -28,25 +28,31 @@ public class InterfazProductosCarroDeCompras {
         ImageIcon iconEmpresa = new ImageIcon(getClass().getResource("/images/SpeedLab LOGO.png"));
         frame.setIconImage(iconEmpresa.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH));
 
-        resumenCarrito.setText(cliente.carrito.imprimirCarrito());
+        resumenCarrito.setText(usuario.carrito.imprimirCarrito());
 
-        txtInfoCliente.setText(cliente.cliente.imprimirInfoCliente());
+        txtInfoCliente.setText(usuario.cliente.imprimirInfoCliente());
 
         volverButton.addActionListener(e -> {
            frame.dispose();
         });
 
         vaciarCarritoButton.addActionListener(e -> {
-            cliente.carrito.vaciarCarrito();
-            resumenCarrito.setText(cliente.carrito.imprimirCarrito());
+            usuario.carrito.vaciarCarrito();
+            resumenCarrito.setText(usuario.carrito.imprimirCarrito());
             JOptionPane.showMessageDialog(null, "Carrito Vaciado con Éxito");
         });
 
 
         realizarPedidoButton.addActionListener(e -> {
-            cliente.carrito.vaciarCarrito();
-            resumenCarrito.setText(cliente.carrito.imprimirCarrito());
+            if (usuario.carrito.estaVacio()) {
+                JOptionPane.showMessageDialog(null, "El carrito está vacio");
+            }else{
+
+
+            usuario.carrito.vaciarCarrito();
+            resumenCarrito.setText(usuario.carrito.imprimirCarrito());
             JOptionPane.showMessageDialog(null, "Compra Realizada con Éxito");
+            }
         });
 
 

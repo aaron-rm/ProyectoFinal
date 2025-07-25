@@ -1,6 +1,7 @@
 package cSistema.cServicios;
 
 import bInterfaz.InterfazPrincipal;
+import cSistema.aUsuario.Cuenta;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,15 +26,22 @@ public class InterfazCita extends JFrame {
     private CardLayout cardLayout;
     private Agenda agenda;
 
+    private int cantUsuariosActuales;
+    private Cuenta[] usuarios;
+    private Agenda citas;
     private final String[] nombresMeses = {
             "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
             "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
     };
 
-    public InterfazCita() {
+    public InterfazCita(Cuenta[] usuarios, Agenda citas,int cantUsuariosActuales) {
         super("Agendamiento de Servicios de Detailing");
 
-        agenda = new Agenda();
+        this.usuarios=usuarios;
+        this.citas=citas;
+        this.cantUsuariosActuales=cantUsuariosActuales;
+
+        agenda = citas;
         contenedor = new JPanel();
         cardLayout = new CardLayout();
         contenedor.setLayout(cardLayout);
@@ -124,7 +132,7 @@ public class InterfazCita extends JFrame {
         btnMenuPrincipal.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnMenuPrincipal.addActionListener(e -> {
             dispose();
-           new InterfazPrincipal();
+           new InterfazPrincipal(usuarios,citas,cantUsuariosActuales);
         });
 
         panelMenu.add(Box.createVerticalStrut(10));
@@ -144,7 +152,7 @@ public class InterfazCita extends JFrame {
         btnVolver.addActionListener(e -> {
             limpiarFormulario();
             dispose();
-            new InterfazPrincipal();
+            new InterfazPrincipal(usuarios,citas,cantUsuariosActuales);
         });
 
         GridBagConstraints gbc = new GridBagConstraints();

@@ -2,6 +2,8 @@ package bInterfaz;
 
 import cSistema.aUsuario.Cuenta;
 import cSistema.bProductos.*;
+import cSistema.cServicios.Agenda;
+import cSistema.cServicios.Cita;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +22,7 @@ public class InterfazProductos {
     private JButton volverAlMenúPrincipalButton;
     private JPanel panelContenido;
 
-    public InterfazProductos(Cuenta cliente){
+    public InterfazProductos(Cuenta[] usuarios, Agenda citas, Cuenta usuarioActual, int cantUsuariosActuales){
         //frame principal
         JFrame frame = new JFrame("\uD835\uDE4E\uD835\uDE65\uD835\uDE5A\uD835\uDE5A\uD835\uDE59\uD835\uDE47\uD835\uDE56\uD835\uDE57 | Productos");
         frame.setVisible(true);
@@ -31,8 +33,6 @@ public class InterfazProductos {
         frame.setLocationRelativeTo(null);
         ImageIcon iconEmpresa = new ImageIcon(getClass().getResource("/images/SpeedLab LOGO.png"));
         frame.setIconImage(iconEmpresa.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH));
-
-
 
 
 
@@ -95,7 +95,7 @@ public class InterfazProductos {
                 int id = (Integer.parseInt((eleccionProducto.getSelectedItem().toString())));
                 int cant = Integer.parseInt(cantidadProducto.getSelectedItem().toString());
                 Producto producto = catalogo.buscarProductoPorId(id);
-                cliente.carrito.agregarProducto(producto,cant);
+                usuarioActual.carrito.agregarProducto(producto,cant);
             }catch(Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
             }
@@ -106,12 +106,12 @@ public class InterfazProductos {
         ImageIcon iconCarrito = new ImageIcon(getClass().getResource("/images/carro compras.png"));
         carroDeComprasButton.setIcon(new ImageIcon(iconCarrito.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE,Image.SCALE_SMOOTH)));
         carroDeComprasButton.addActionListener(e -> {
-            new InterfazProductosCarroDeCompras(cliente);
+            new InterfazProductosCarroDeCompras(usuarioActual);
         });
 
         volverAlMenúPrincipalButton.addActionListener(e-> {
             frame.dispose();
-            new InterfazPrincipal();
+            new InterfazPrincipal(usuarios,citas,cantUsuariosActuales);
         });
     }
 

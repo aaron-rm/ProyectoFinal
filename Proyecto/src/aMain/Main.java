@@ -2,6 +2,10 @@ package aMain;
 
 import bInterfaz.InterfazCuenta;
 import bInterfaz.InterfazPrincipal;
+import cSistema.aUsuario.Cliente;
+import cSistema.aUsuario.Cuenta;
+import cSistema.cServicios.Agenda;
+import cSistema.cServicios.Cita;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,6 +26,7 @@ public class Main extends JFrame {
     private JButton salirButton;
     private JLabel txtLABEL;
     private JLabel textoSuperior;
+    private int cantUsuariosActuales = 0;
 
 
     public Main(){
@@ -36,8 +41,19 @@ public class Main extends JFrame {
 
         //ir a la pantalla principal
         iniciarButton.addActionListener(ActionListener->{
+            Cita c;
+            Cuenta[] cuenta=new Cuenta[10];
             frame.dispose();
-            new InterfazPrincipal();
+            //datos de ejemplos
+            cuenta[0] = new Cuenta("usuario","1234",new Cliente("1","Cuenta Ejemplo",111111,"correoEjemplo@gmail.com"));
+            cantUsuariosActuales++;
+
+            cSistema.cServicios.Cliente cliente = new cSistema.cServicios.Cliente("Cliente de Ejemplo");
+            c = new Cita(cliente,"Detailing de Interiores","Taller","26 de Julio de 2025","9-11 AM");
+            Agenda agenda = new Agenda();
+            agenda.agendarCita(c);
+
+            new InterfazPrincipal(cuenta,agenda,cantUsuariosActuales);
         });
 
         salirButton.addActionListener(ActionListener->{

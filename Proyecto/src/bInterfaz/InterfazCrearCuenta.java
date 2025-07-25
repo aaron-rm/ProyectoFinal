@@ -29,7 +29,6 @@ public class InterfazCrearCuenta extends JDialog {
         setDefaultCloseOperation(frame.DISPOSE_ON_CLOSE);
         setContentPane(getInterfazPrincipal());
 
-
         limpiarCamposButton.addActionListener(e -> {
             //vaciar todos los campos
             txtNombre.setText("");
@@ -53,7 +52,8 @@ public class InterfazCrearCuenta extends JDialog {
 
 
                 Cliente cliente = new Cliente(id,nombre,telefono,correo);
-                cuenta = new Cuenta(usuario,contrasenia,cliente);
+                this.cuenta = new Cuenta(usuario,contrasenia,cliente);
+
                 verificado = true;
             }catch (NullPointerException exception){
                 JOptionPane.showMessageDialog(null,exception.getMessage());

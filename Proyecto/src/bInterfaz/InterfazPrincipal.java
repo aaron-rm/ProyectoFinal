@@ -3,6 +3,8 @@ package bInterfaz;
 
 import cSistema.aUsuario.Cliente;
 import cSistema.aUsuario.Cuenta;
+import cSistema.cServicios.Agenda;
+import cSistema.cServicios.Cita;
 import cSistema.cServicios.InterfazCita;
 
 import javax.swing.*;
@@ -24,7 +26,7 @@ public class InterfazPrincipal extends JFrame{
     private boolean sesionIniciada=false;
 
 
-    public InterfazPrincipal (){
+    public InterfazPrincipal (Cuenta[] usuarios, Agenda citas, int cantUsuariosActuales){
         //frame principal
         JFrame frame = new JFrame("\uD835\uDE4E\uD835\uDE65\uD835\uDE5A\uD835\uDE5A\uD835\uDE59\uD835\uDE47\uD835\uDE56\uD835\uDE57 | Detailing, Pulidos y Más");
         frame.setVisible(true);
@@ -46,12 +48,12 @@ public class InterfazPrincipal extends JFrame{
 
         serviciosButton.addActionListener(ActionListener->{
             frame.dispose();
-            new InterfazCita();
+            new InterfazCita(usuarios, citas,cantUsuariosActuales);
         });
 
         productosButton.addActionListener(ActionListener->{
             frame.dispose();
-            new InterfazCuenta();
+            new InterfazCuenta(usuarios, citas, cantUsuariosActuales);
         });
 
         //botones de redes sociales
