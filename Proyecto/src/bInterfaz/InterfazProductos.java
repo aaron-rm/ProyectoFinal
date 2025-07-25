@@ -1,16 +1,15 @@
 package bInterfaz;
 
-import cSistema.aUsuario.Cliente;
 import cSistema.aUsuario.Cuenta;
 import cSistema.bProductos.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class InterfazProductos {
     private final int ICON_SCALE = 30;
     private JPanel InterfazPrincipal;
-    private JButton volverButton;
     private JButton carroDeComprasButton;
     private JComboBox filtroBusqueda;
     private JPanel resultadosProductos;
@@ -18,6 +17,7 @@ public class InterfazProductos {
     private JButton agregarAlCarritoButton;
     private JComboBox eleccionProducto;
     private JComboBox cantidadProducto;
+    private JButton volverAlMenúPrincipalButton;
     private JPanel panelContenido;
 
     public InterfazProductos(Cuenta cliente){
@@ -33,10 +33,7 @@ public class InterfazProductos {
         frame.setIconImage(iconEmpresa.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH));
 
 
-        volverButton.addActionListener(e -> {
-            frame.dispose();
-            new InterfazPrincipal(cliente);
-        });
+
 
 
         CatalogoManager catalogo = new CatalogoManager();
@@ -110,6 +107,11 @@ public class InterfazProductos {
         carroDeComprasButton.setIcon(new ImageIcon(iconCarrito.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE,Image.SCALE_SMOOTH)));
         carroDeComprasButton.addActionListener(e -> {
             new InterfazProductosCarroDeCompras(cliente);
+        });
+
+        volverAlMenúPrincipalButton.addActionListener(e-> {
+            frame.dispose();
+            new InterfazPrincipal();
         });
     }
 

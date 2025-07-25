@@ -15,6 +15,7 @@ public class InterfazCuenta extends JFrame{
     private JButton crearCuentaButton;
     private JButton iniciarSesiónButton;
     private JButton salirButton;
+    private JButton volverAlMenúPrincipalButton;
     private Cuenta usuario;
 
     public InterfazCuenta(){
@@ -30,7 +31,10 @@ public class InterfazCuenta extends JFrame{
         frame.setIconImage(iconEmpresa.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE, Image.SCALE_SMOOTH));
 
 
-
+        volverAlMenúPrincipalButton.addActionListener(e->{
+            frame.dispose();
+            new InterfazPrincipal();
+        });
         iniciarSesiónButton.addActionListener(e -> {
             //iniciar sesion
             Cliente clienteEjemplo = new Cliente("ID de ejemplo","Usuario de Ejemplo",11111,"correo@gmail.com");
@@ -53,7 +57,7 @@ public class InterfazCuenta extends JFrame{
 
                 JOptionPane.showMessageDialog(this,"Sesión Iniciada");
                 frame.dispose();
-                new InterfazPrincipal(usuario);
+                new InterfazProductos(usuario);
 
 
             }catch (NullPointerException exception){
@@ -93,7 +97,7 @@ public class InterfazCuenta extends JFrame{
                 if (opcion == JOptionPane.YES_OPTION) {
                     frame.dispose();
                     usuario = cuenta.getCuenta();
-                    new InterfazPrincipal(usuario);
+                    new InterfazProductos(usuario);
                 }else usuario = cuenta.getCuenta();
             }
 

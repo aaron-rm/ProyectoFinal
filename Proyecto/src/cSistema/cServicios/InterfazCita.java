@@ -1,5 +1,7 @@
 package cSistema.cServicios;
 
+import bInterfaz.InterfazPrincipal;
+
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
@@ -8,6 +10,7 @@ public class InterfazCita extends JFrame {
     private JTextField txtNombre;
     private JComboBox<String> cmbDia, cmbMes, cmbAño; // cambio aquí
     private JButton btnAgendar;
+    private JButton btnMenuPrincipal;
     private JLabel lblMensaje, lblGracias;
 
     private JButton btnInterior, btnExterior, btnCeramico, btnCompleto;
@@ -73,6 +76,7 @@ public class InterfazCita extends JFrame {
         cmbAño = new JComboBox<>(años); // cambio aquí
 
         btnAgendar = new JButton("Agendar");
+        btnMenuPrincipal = new JButton("Volver al menú principal");
         lblMensaje = new JLabel("");
         lblMensaje.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -117,10 +121,16 @@ public class InterfazCita extends JFrame {
 
         btnAgendar.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnAgendar.addActionListener(e -> agendar());
+        btnMenuPrincipal.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnMenuPrincipal.addActionListener(e -> {
+            dispose();
+           new InterfazPrincipal();
+        });
 
         panelMenu.add(Box.createVerticalStrut(10));
         panelMenu.add(btnAgendar);
         panelMenu.add(lblMensaje);
+        panelMenu.add(btnMenuPrincipal);
     }
 
     private void crearPanelConfirmacion() {
@@ -130,10 +140,11 @@ public class InterfazCita extends JFrame {
         lblGracias.setFont(new Font("Arial", Font.BOLD, 16));
         lblGracias.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JButton btnVolver = new JButton("Volver al menú de servicios");
+        JButton btnVolver = new JButton("Volver al menú principal");
         btnVolver.addActionListener(e -> {
             limpiarFormulario();
-            cardLayout.show(contenedor, "menu");
+            dispose();
+            new InterfazPrincipal();
         });
 
         GridBagConstraints gbc = new GridBagConstraints();

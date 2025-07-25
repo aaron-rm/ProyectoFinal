@@ -1,6 +1,7 @@
 package aMain;
 
 import bInterfaz.InterfazCuenta;
+import bInterfaz.InterfazPrincipal;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,7 +37,7 @@ public class Main extends JFrame {
         //ir a la pantalla principal
         iniciarButton.addActionListener(ActionListener->{
             frame.dispose();
-            new InterfazCuenta();
+            new InterfazPrincipal();
         });
 
         salirButton.addActionListener(ActionListener->{
