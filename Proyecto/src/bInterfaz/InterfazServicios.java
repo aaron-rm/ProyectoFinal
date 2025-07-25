@@ -1,6 +1,6 @@
 package bInterfaz;
 
-import cSistema.aUsuario.Cliente;
+import cSistema.aUsuario.Cuenta;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +13,7 @@ public class InterfazServicios {
     private JButton verificarDisponibilidadButton;
 
 
-    public InterfazServicios(Cliente cliente){
+    public InterfazServicios(Cuenta cliente){
         //frame principal
         JFrame frame = new JFrame("\uD835\uDE4E\uD835\uDE65\uD835\uDE5A\uD835\uDE5A\uD835\uDE59\uD835\uDE47\uD835\uDE56\uD835\uDE57 | Servicios");
         frame.setVisible(true);

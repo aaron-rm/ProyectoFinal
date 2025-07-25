@@ -2,6 +2,7 @@ package bInterfaz;
 
 
 import cSistema.aUsuario.Cliente;
+import cSistema.aUsuario.Cuenta;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,13 +18,12 @@ public class InterfazPrincipal extends JFrame{
     private JLabel empresaLOGO;
     private JButton productosButton;
     private JButton serviciosButton;
-    private JButton cerrarSesiónButton;
     private JButton salirButton;
     private final int ICON_SCALE = 30;
     private boolean sesionIniciada=false;
-    private Cliente cliente;
 
-    public InterfazPrincipal (Cliente cliente){
+
+    public InterfazPrincipal (Cuenta usuario){
         //frame principal
         JFrame frame = new JFrame("\uD835\uDE4E\uD835\uDE65\uD835\uDE5A\uD835\uDE5A\uD835\uDE59\uD835\uDE47\uD835\uDE56\uD835\uDE57 | Detailing, Pulidos y Más");
         frame.setVisible(true);
@@ -45,27 +45,20 @@ public class InterfazPrincipal extends JFrame{
 
 
 
-        ImageIcon iconUsuario = new ImageIcon(getClass().getResource("/images/usuario.png"));
-        cerrarSesiónButton.setIcon(new ImageIcon(iconUsuario.getImage().getScaledInstance(ICON_SCALE, ICON_SCALE,Image.SCALE_SMOOTH)));
-        cerrarSesiónButton.addActionListener(e -> {
-            frame.dispose();
-            new InterfazCuenta();
-        });
+
 
 
 
         serviciosButton.addActionListener(ActionListener->{
             frame.dispose();
-            new InterfazServicios(cliente);
+            new InterfazServicios(usuario);
 
 
         });
 
         productosButton.addActionListener(ActionListener->{
             frame.dispose();
-            new InterfazProductos(cliente);
-
-
+            new InterfazProductos(usuario);
         });
 
         //botones de redes sociales

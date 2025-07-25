@@ -1,12 +1,12 @@
 package cSistema.aUsuario;
 
 public class Cliente {
-  private String id;
+    private String id;
     private String nombre;
-    private String telefono;
+    private int telefono;
     private String correoElectronico;
 
-    public Cliente(String id, String nombre, String telefono, String correoElectronico) {
+    public Cliente(String id, String nombre, int telefono, String correoElectronico) {
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -21,7 +21,7 @@ public class Cliente {
         return nombre;
     }
 
-    public String getTelefono() {
+    public int getTelefono() {
         return telefono;
     }
 
@@ -34,5 +34,9 @@ public class Cliente {
         System.out.println("Nombre: " + nombre);
         System.out.println("Teléfono: " + telefono);
         System.out.println("Correo Electrónico: " + correoElectronico);
+    }
+    public String imprimirInfoCliente() {
+        String infoCliente = String.format("\nCliente ID: "+ id+"\nNombre: " +nombre+"\nTeléfono: "+telefono+"\nCorreo Electónico: "+correoElectronico+"\n");
+        return infoCliente;
     }
 }

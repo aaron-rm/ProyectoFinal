@@ -1,6 +1,7 @@
 package bInterfaz;
 
 import cSistema.aUsuario.Cliente;
+import cSistema.aUsuario.Cuenta;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +15,7 @@ public class InterfazCuenta extends JFrame{
     private JButton crearCuentaButton;
     private JButton iniciarSesiónButton;
     private JButton salirButton;
-
+    private Cuenta usuario;
 
     public InterfazCuenta(){
         //frame principal
@@ -32,12 +33,37 @@ public class InterfazCuenta extends JFrame{
 
         iniciarSesiónButton.addActionListener(e -> {
             //iniciar sesion
+            Cliente clienteEjemplo = new Cliente("ID de ejemplo","Usuario de Ejemplo",11111,"correo@gmail.com");
+            Cuenta cuentaEjmeplo = new Cuenta("usuario","1234",clienteEjemplo);
+
+            try {
+                String user = usuarioTextField.getText().trim();
+                String contrasenia = contraseñaTextField.getText().trim();
+
+                if (user.matches("") || contrasenia.matches("")){
+                    throw new RuntimeException("Rellene todos los datos");
+                }else if (user.matches(cuentaEjmeplo.getIdCuenta()) && contrasenia.matches(cuentaEjmeplo.getPassword())){
+                    JOptionPane.showMessageDialog(this,"Sesión Iniciada con cuenta de ejemplo");
+                    usuario = cuentaEjmeplo;
+                }else if (user.matches(usuario.getIdCuenta()) && contrasenia.matches(usuario.getPassword())){
+                    JOptionPane.showMessageDialog(this,"Bienvenido "+usuario.cliente.getNombre());
+                }else {
+                    throw new RuntimeException("No se ha encontrado ninguna cuenta");
+                }
+
+                JOptionPane.showMessageDialog(this,"Sesión Iniciada");
+                frame.dispose();
+                new InterfazPrincipal(usuario);
 
 
-            JOptionPane.showMessageDialog(this,"Sesión Iniciada");
-            Cliente cliente = new Cliente();
-            frame.dispose();
-            new InterfazPrincipal(cliente);
+            }catch (NullPointerException exception){
+                System.out.println("1");
+                JOptionPane.showMessageDialog(null,"No existe esta cuenta");
+            }
+            catch (RuntimeException exception){
+                System.out.println("2");
+                JOptionPane.showMessageDialog(null,exception.getMessage());
+            }
         });
 
         limpiarCamposButton.addActionListener(e -> {
@@ -52,7 +78,26 @@ public class InterfazCuenta extends JFrame{
 
         crearCuentaButton.addActionListener(e -> {
             //crear una cuenta
-            new InterfazCrearCuenta();
+            InterfazCrearCuenta cuenta = new InterfazCrearCuenta(frame);
+            cuenta.setVisible(true);
+
+            boolean estado = cuenta.getEstado();
+            if(estado){
+                int opcion = JOptionPane.showConfirmDialog(
+                        null,
+                        "¿Deseas iniciar sesión con la cuenta creada?",
+                        "Iniciar Sesión",
+                        JOptionPane.YES_NO_OPTION
+                );
+
+                if (opcion == JOptionPane.YES_OPTION) {
+                    frame.dispose();
+                    usuario = cuenta.getCuenta();
+                    new InterfazPrincipal(usuario);
+                }else usuario = cuenta.getCuenta();
+            }
+
+
         });
 
     }

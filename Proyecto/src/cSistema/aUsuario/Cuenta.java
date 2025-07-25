@@ -1,22 +1,34 @@
 package cSistema.aUsuario;
 
+import cSistema.bProductos.Carrito;
+
 public class Cuenta {
-  private String idCuenta;
+    private String idCuenta;
     private String password;
-    private Cliente cliente;
+    public Cliente cliente;
     private boolean activa;
-    private int puntosAcumulados;
+    public Carrito carrito;
 
     public Cuenta(String idCuenta, String password, Cliente cliente) {
+        //cuenta nueva
         this.idCuenta = idCuenta;
         this.password = password;
         this.cliente = cliente;
-        this.activa = false;
-        this.puntosAcumulados = 0;
+        this.carrito = new Carrito();
+    }
+
+    public Cuenta(String idCuenta, String password) {
+        //cuenta existente
+        this.idCuenta = idCuenta;
+        this.password = password;
     }
 
     public String getIdCuenta() {
         return idCuenta;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public Cliente getCliente() {
@@ -47,14 +59,4 @@ public class Cuenta {
         }
     }
 
-    //Pts por compra
-    public void agregarPuntos(double totalCompra) {
-        int puntos = (int)(totalCompra / 10);
-        puntosAcumulados += puntos;
-        System.out.println("Se agregaron " + puntos + " puntos a la cuenta.");
-    }
-
-    public int getPuntosAcumulados() {
-        return puntosAcumulados;
-    }
 }
